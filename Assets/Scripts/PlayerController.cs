@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private bool isOnGround = true;
-    //
     Rigidbody rb;
     [SerializeField] float movementSpeed = 2.5f;
     [SerializeField] float jumpForce = 2.5f;
@@ -28,16 +24,6 @@ public class PlayerController : MonoBehaviour
     private float y = -2f;
     public GameObject winMenu;
     public GameObject win;
-
-
-    public void GameOver()
-    {
-        Time.timeScale = 0f; // *Note:...
-        overMenu.SetActive(true);
-        pointsOverGame.text = point.ToString();
-    }
-
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,7 +34,6 @@ public class PlayerController : MonoBehaviour
         overMenu.SetActive(false);
         winMenu.SetActive(false);
     }
-
     void Update()
     {
 
@@ -60,7 +45,7 @@ public class PlayerController : MonoBehaviour
         Show();
         MenuPaused();
     }
-
+    // Dùng để hiển thị khi tạm dừng game
     public void MenuPaused()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -75,9 +60,16 @@ public class PlayerController : MonoBehaviour
                 FindObjectOfType<PauseGame>().PauseGames();
             }
         }
-
+    }
+    // Hàm dùng khi bị thua
+    public void GameOver()
+    {
+        Time.timeScale = 0f; // *Note:...
+        overMenu.SetActive(true);
+        pointsOverGame.text = point.ToString();
     }
     private bool IsPausedSound = false;
+    // Hàm dùng khi muốn reset game
     public void ResetGames()
     {
 
@@ -87,10 +79,8 @@ public class PlayerController : MonoBehaviour
             soundReset.Play();
             GameOver();
         }
-
-        //Tính điểm trên màn hình Over Game
     }
-
+    // Hàm dùng để quả bóng nahyr lên
     public void Jump()
     {
         if (transform.position.y >= 0)

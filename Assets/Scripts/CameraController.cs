@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-     public GameObject player;
-
+    // Vật thể muốn camera quay
+    public GameObject player;
+    // Tọa độ của camera
     private Vector3 offset;
-
     void Start ()
     {
         offset = transform.position - player.transform.position;
@@ -18,3 +16,6 @@ public class CameraController : MonoBehaviour
         transform.position = player.transform.position + offset;
     }
 }
+
+
+
